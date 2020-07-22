@@ -65,7 +65,7 @@ public class AdminCategoryController {
 	public String edit(@PathVariable int id,Model model) {
 		Category category=ceRepository.getOne(id);
 		model.addAttribute("category",category);
-		return "admin/pages/edit";
+		return "admin/categories/edit";
 	}
 
 }
