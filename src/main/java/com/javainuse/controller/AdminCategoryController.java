@@ -45,8 +45,10 @@ public class AdminCategoryController {
 		if (bindginresult.hasErrors()) {
 			return "admin/categories/add";
 		}
-		redirectattributes.addFlashAttribute("message", "Category added");
-		redirectattributes.addFlashAttribute("alertClass", "alert-success");
+		/*
+		 * redirectattributes.addFlashAttribute("message", "Category added");
+		 * redirectattributes.addFlashAttribute("alertClass", "alert-success");
+		 */
 		String slug = category.getName().toLowerCase().replace(" ", "-");
 		Category categoryExists=ceRepository.findByName(slug);
 		
@@ -66,6 +68,36 @@ public class AdminCategoryController {
 		Category category=ceRepository.getOne(id);
 		model.addAttribute("category",category);
 		return "admin/categories/edit";
+	}
+	@PostMapping("/edit")
+	public String edit(@Valid Category category, BindingResult bindginresult, RedirectAttributes redirectattributes,
+			Model model) {
+		Category categoyCurrent =  ceRepository.getOne(category.getId());
+		if (bindginresult.hasErrors()) {
+			model.addAttribute("categoryName", categoyCurrent.getName());
+			return "admin/categories/edit";
+		}
+		redirectattributes.addFlashAttribute("message", "Category ediited");
+		redirectattributes.addFlashAttribute("alertClass", "alert-success");
+		String slug = category.getName().toLowerCase().replace("", "-");
+		Category categoryExists = ceRepository.findByName(category.getName());
+		//Page slugExists = pageRepo.findBySlug(page.getId(),slug);
+		
+		if (categoryExists != null) {
+			redirectattributes.addFlashAttribute("message", "Category exists,choose another");
+			redirectattributes.addFlashAttribute("alertClass", "alert-danger");
+		} else {
+			category.setSlug(slug);
+			ceRepository.save(category);
+		}
+		return "redirect:/admin/categories/edit/"+category.getId();
+	}
+	@GetMapping("/delete/{id}")
+	public String edit(@PathVariable int id,RedirectAttributes redirectattributes) {
+		ceRepository.deleteById(id);
+		redirectattributes.addFlashAttribute("message", "Category Deleted");
+		redirectattributes.addFlashAttribute("alertClass", "alert-success");
+		return "redirect:/admin/categories";
 	}
 
 }
