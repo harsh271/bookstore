@@ -49,7 +49,7 @@ public class AdminCategoryController {
 		 * redirectattributes.addFlashAttribute("message", "Category added");
 		 * redirectattributes.addFlashAttribute("alertClass", "alert-success");
 		 */
-		String slug = category.getName().toLowerCase().replace(" ", "-");
+		 String slug = category.getName().toLowerCase().replace(" ", "-");
 		Category categoryExists=ceRepository.findByName(slug);
 		
 		if (categoryExists != null) {
