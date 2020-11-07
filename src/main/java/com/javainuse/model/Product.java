@@ -29,7 +29,7 @@ public class Product {
 	@Size(min=5,message="Description must be atleast 2 charecters long")
 	private String description;
 	private String image;
-	//@Pattern(regexp="^([0-9]+[.][0-9] {1,2})?", message="Expected format:5,5,99,15,15.99")
+	//@Pattern(regexp="^([0-9]+[.][0-9] {1,2})?", message="Expected format:5,5.99,15,15.99")
 	private String price;
 	//@Pattern(regexp="^[1-9][0-9]*",message="Please choose the  format:5,5.99,15,15.99")
 	@Column(name="category_id",updatable=false)
