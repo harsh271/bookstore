@@ -90,8 +90,10 @@ public class AdminProductController {
 	}
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id,Model model) {
+		List<Category> categories=	categoryRepository.findAll();
 		Product product=productRepository.getOne(id);
 		model.addAttribute("product",product);
+		model.addAttribute("categories",categories);
 		return "admin/products/edit";
 	}
 }
