@@ -1,5 +1,7 @@
 package com.javainuse.db;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,6 +16,7 @@ extends JpaRepository<Page,Integer>{
 	 */
 	 
 
+	List<Page> findAllByOrderBySortingAsc();
 	Page findBySlug(String slug);
 	Page findBySlugAndIdNot(String slug,int id); 
 }
